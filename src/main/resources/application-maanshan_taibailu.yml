@@ -3,7 +3,7 @@ mqtt:
   hostUrl: tcp://192.168.1.220:1883
   username: admin
   password: wanda@1234
-  client-id: IOT-EPC-Pj3405040030-${spring.profiles.active}
+  client-id: IOT-EPC-Pj3405040030-kl
   cleanSession: true
   reconnect: true
   keepAlive: 100
@@ -13,8 +13,6 @@ mqtt:
   setdownTopic: cloud/gcid/setdown
 
 spring:
-  profiles:
-    active: kl
     #redis配置
   redis:
     host: 192.168.1.220
@@ -41,4 +39,4 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-beanName: winnerFlowDevice
+beanName: haiKangPassengerFlowDevice
