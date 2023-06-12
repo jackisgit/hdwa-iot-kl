@@ -7,9 +7,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
- *@description 海康威视客流采集
- *@author LianYanFei
- *@date 2023/5/20
+ * @author LianYanFei
+ * @description 海康威视客流采集
+ * @date 2023/5/20
  */
 @Configuration
 @EnableScheduling
@@ -18,7 +18,7 @@ public class CommonTask {
     @Autowired
     private HaiKangPassengerFlowDevice device;
 
-    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "${epc.cron}")
     public boolean processData() throws Exception {
         return device.processData();
     }

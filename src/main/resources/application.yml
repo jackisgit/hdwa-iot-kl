@@ -1,0 +1,22 @@
+# 环境配置
+spring:
+  profiles:
+    active: changde_wuling
+
+# web访问端口号
+server:
+  port: 8111
+
+# mybatis 配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 采集器配置
+epc:
+  gatewayId: KL
+  subsystem: klxt/
+  threadNum: 30
+  cron: 0 0/1 * * * ?
+
+beanName: haiKangPassengerFlowDevice

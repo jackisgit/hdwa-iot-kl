@@ -9,7 +9,6 @@ package com.wanda.epc.device;
 
 public class HaiKangPassengerFlow {
 
-
     /**
      * 场内实时人数
      */
@@ -30,7 +29,6 @@ public class HaiKangPassengerFlow {
      * 前端设备故障点个数
      */
     Integer deviceFailureNum = 0;
-
 
 
     public Integer getCurrentNum() {
@@ -72,4 +70,5 @@ public class HaiKangPassengerFlow {
     public void setDeviceFailureNum(Integer deviceFailureNum) {
         this.deviceFailureNum = deviceFailureNum;
     }
+
 }

@@ -22,8 +22,8 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: hykluser
     password: hykluser123&*(
-    url: jdbc:postgresql://10.91.16.219:7092/cfas_cfasdb
+    url: jdbc:postgresql://10.10.49.127:7092/cfas_cfasdb
 
 epc:
   # 广场id
-  gcId: 3405040030
+  gcId: 4307020030
