@@ -68,24 +68,27 @@ public class HaiKangPassengerFlowDevice extends BaseDevice {
                 for (String key : keys) {
                     log.info("客流key================={}", key);
                     DeviceMessage deviceMessage = JSON.parseObject(JSON.toJSONString(redisUtil.get(key)), DeviceMessage.class);
+                    if (deviceMessage == null) {
+                        continue;
+                    }
                     log.info("开始消息发送");
                     //场内实时人数
-                    if (key.equals("bdExsitPeopleNum")) {
+                    if (Objects.equals("bdExsitPeopleNum", deviceMessage.getOutParamId())) {
                         sendMsg(haiKangPassengerFlowBean.getCurrentNum(), deviceMessage);
                         log.info("场内实时人数:" + haiKangPassengerFlowBean.getCurrentNum());
                     }
                     //当日累计人数
-                    if (key.equals("accInNum")) {
+                    if (Objects.equals("accInNum", deviceMessage.getOutParamId())) {
                         sendMsg(haiKangPassengerFlowBean.getTodayNum(), deviceMessage);
                         log.info("当日累计人数:" + haiKangPassengerFlowBean.getTodayNum());
                     }
                     //步行街实时人数
-                    if (key.equals("flExsitPeopleNum")) {
+                    if (Objects.equals("flExsitPeopleNum", deviceMessage.getOutParamId())) {
                         sendMsg(haiKangPassengerFlowBean.getStreetCurrentNum(), deviceMessage);
                         log.info("步行街实时人数:" + haiKangPassengerFlowBean.getStreetCurrentNum());
                     }
                     //步行街当日累计人数
-                    if (key.equals("accFlInNum")) {
+                    if (Objects.equals("accFlInNum", deviceMessage.getOutParamId())) {
                         sendMsg(haiKangPassengerFlowBean.getStreetTodayNum(), deviceMessage);
                         log.info("步行街当日累计人数:" + haiKangPassengerFlowBean.getStreetTodayNum());
                     }
