@@ -7,7 +7,7 @@ package com.wanda.epc.device;
  * @create: 2022-08-22 16:23
  **/
 
-public class HaiKangPassengerFlow {
+public class PassengerFlow {
 
     /**
      * 场内实时人数

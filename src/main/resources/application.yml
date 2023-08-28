@@ -1,7 +1,7 @@
 # 环境配置
 spring:
   profiles:
-    active: wuxi_yixing
+    active: maoming_huazhou
 
 # web访问端口号
 server:
@@ -17,9 +17,9 @@ epc:
   gatewayId: KL
   subsystem: klxt/
   threadNum: 30
-  cron: 0 0/1 * * * ?
+  cron: 30 0/1 * * * ?
 
-beanName: haiKangPassengerFlowDevice
+beanName: passengerFlowDevice
 
 full-sync:
   cron: 15 0/4 * * * ?

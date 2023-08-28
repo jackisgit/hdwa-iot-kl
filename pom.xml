@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>iot_epc_kl</artifactId>
-    <version>1.0.0-R20230612</version>    <!--    大的版本升级修改第一位;大的bug修复-修改第二位;小的bug修复修改第三位;-->
+    <version>1.0.0-R20230828</version>    <!--    大的版本升级修改第一位;大的bug修复-修改第二位;小的bug修复修改第三位;-->
 
     <dependencies>
         <dependency>
@@ -17,14 +17,12 @@
             <artifactId>iot_epc_common</artifactId>
             <version>${iot_epc_common.version}</version>
         </dependency>
+
+        <!-- Apache HttpClient -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
         </dependency>
     </dependencies>
 

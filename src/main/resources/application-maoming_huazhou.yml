@@ -18,12 +18,7 @@ spring:
     host: 127.0.0.1
     port: 16379
     password:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: hykluser
-    password: hykluser123&*(
-    url: jdbc:postgresql://10.70.16.35:7092/cfas_cfasdb
 
 epc:
   # 广场id
-  gcId: 3202820010
+  gcId: 1502040050
