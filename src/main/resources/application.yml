@@ -1,7 +1,7 @@
 # 环境配置
 spring:
   profiles:
-    active: wuxi_yixing
+    active: qiqihaer
 
 # web访问端口号
 server:
