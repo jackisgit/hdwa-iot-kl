@@ -1,7 +1,7 @@
 # 环境配置
 spring:
   profiles:
-    active: maoming_huazhou
+    active: zhangzhou_xiangcheng
 
 # web访问端口号
 server:

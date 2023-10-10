@@ -101,7 +101,7 @@ public class PassengerFlowDevice extends BaseDevice {
 
     public static PassengerFlow query() {
         PassengerFlow passengerFlowBean = new PassengerFlow();
-        String url = "http://10.165.160.21:6002/service/api/reports/index/customer_analysis_summary";
+        String url = "http://10.71.32.30:6002/service/api/reports/index/customer_analysis_summary";
         try {
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
@@ -123,12 +123,12 @@ public class PassengerFlowDevice extends BaseDevice {
 
             String retention = data.getStr("retention");
             String inpv = data.getStr("inpv");
-            String storeRetention = data.getStr("store_retention");
+            String streetRetention = data.getStr("street_retention");
             String streetInpv = data.getStr("street_inpv");
 
             passengerFlowBean.setCurrentNum(NumberUtil.isInteger(retention) ? Integer.parseInt(retention) : 0);
             passengerFlowBean.setTodayNum(NumberUtil.isInteger(inpv) ? Integer.parseInt(inpv) : 0);
-            passengerFlowBean.setStreetCurrentNum(NumberUtil.isInteger(storeRetention) ? Integer.parseInt(storeRetention) : 0);
+            passengerFlowBean.setStreetCurrentNum(NumberUtil.isInteger(streetRetention) ? Integer.parseInt(streetRetention) : 0);
             passengerFlowBean.setStreetTodayNum(NumberUtil.isInteger(streetInpv) ? Integer.parseInt(streetInpv) : 0);
         } catch (IOException e) {
             e.printStackTrace();
