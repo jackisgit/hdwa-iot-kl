@@ -40,7 +40,7 @@
                     <packages>com.wanda</packages>
                     <!--                        <cfgfiles>*.yml</cfgfiles>-->
                     <excludes>org.spring</excludes>
-                    <code>91376CAB94D766EA1335C9C142223890D41D8CD98F00B204E9800998ECF8427ED41D8CD98F00B204E9800998ECF8427E</code>
+                    <code>8BC84B957854AF9CE873AE32AEEBB993D41D8CD98F00B204E9800998ECF8427ED41D8CD98F00B204E9800998ECF8427E</code>
                 </configuration>
                 <executions>
                     <execution>
