@@ -88,7 +88,7 @@ public class WenAnPassengerFlowDevice extends BaseDevice {
             }
         }
         if (!CollectionUtils.isEmpty(bxjList)){
-            Map<String, Object> map = totalList.get(0);
+            Map<String, Object> map = bxjList.get(0);
             if (ObjectUtils.isNotEmpty(map)){
                 streetCurrentNum = String.valueOf(map.get("innum"));
                 List<DeviceMessage> streetCurrentNumMessagesList = deviceParamListMap.get("flExsitPeopleNum");
