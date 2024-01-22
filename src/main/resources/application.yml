@@ -19,7 +19,7 @@ epc:
   threadNum: 30
   cron: 0 0/1 * * * ?
 
-beanName: haiKangPassengerFlowDevice
+beanName: wenAnPassengerFlowDevice
 
 full-sync:
   cron: 15 0/4 * * * ?

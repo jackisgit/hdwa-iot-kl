@@ -19,7 +19,7 @@ public class CommonTask {
     private WenAnPassengerFlowDevice device;
 
     @Scheduled(cron = "${epc.cron}")
-    public boolean processData() throws Exception {
+    public boolean processData() {
         return device.processData();
     }
 
