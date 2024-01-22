@@ -1,7 +1,7 @@
 # 环境配置
 spring:
   profiles:
-    active: yinchuan_xixia
+    active: maoming_maonan
 
 # web访问端口号
 server:

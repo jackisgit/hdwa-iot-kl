@@ -1,6 +1,6 @@
 # mqtt配置
 mqtt:
-  hostUrl: tcp://127.0.0.1:1883
+  hostUrl: tcp://10.165.176.120:1883
   username: admin
   password: wanda@1234
   client-id: IOT-EPC-Pj${epc.gcId}-kl
@@ -15,15 +15,15 @@ mqtt:
 # spring配置
 spring:
   redis:
-    host: 127.0.0.1
+    host: 10.165.176.120
     port: 16379
     password:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: hykluser
-    password: hykluser123&*(
-    url: jdbc:postgresql://10.70.16.35:7092/cfas_cfasdb
+    username: readonly
+    password: query
+    url: jdbc:postgresql://10.165.176.225:5432/VionCount
 
 epc:
   # 广场id
-  gcId: 3202820010
+  gcId: 4409021082

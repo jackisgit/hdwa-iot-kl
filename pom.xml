@@ -8,8 +8,8 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>iot_epc_kl_hikvision</artifactId>
-    <version>1.0.0-R20230612</version>    <!--    大的版本升级修改第一位;大的bug修复-修改第二位;小的bug修复修改第三位;-->
+    <artifactId>iot_epc_kl_wenan</artifactId>
+    <version>1.0.0-R20240122</version>    <!--    大的版本升级修改第一位;大的bug修复-修改第二位;小的bug修复修改第三位;-->
 
     <dependencies>
         <dependency>

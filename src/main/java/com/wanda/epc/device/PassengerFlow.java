@@ -1,13 +1,13 @@
 package com.wanda.epc.device;
 
 /**
- * @program: DAPC
- * @description: 海康客流数据响应对象
- * @author: LianYanFei
- * @create: 2022-08-22 16:23
+ * @program: iepc
+ * @description: 客流数据响应对象
+ * @author: liurs
+ * @create: 2024-01-19 15:08
  **/
 
-public class HaiKangPassengerFlow {
+public class PassengerFlow {
 
     /**
      * 场内实时人数

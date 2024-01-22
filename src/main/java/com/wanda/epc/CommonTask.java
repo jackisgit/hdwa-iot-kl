@@ -1,6 +1,6 @@
 package com.wanda.epc;
 
-import com.wanda.epc.device.HaiKangPassengerFlowDevice;
+import com.wanda.epc.device.WenAnPassengerFlowDevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class CommonTask {
 
     @Autowired
-    private HaiKangPassengerFlowDevice device;
+    private WenAnPassengerFlowDevice device;
 
     @Scheduled(cron = "${epc.cron}")
     public boolean processData() throws Exception {
