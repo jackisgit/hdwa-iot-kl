@@ -32,6 +32,9 @@ public class PassengerFlowDevice extends BaseDevice {
     @Value("${epc.gatewayId}")
     private String gatewayId;
 
+    @Value("${apiUrl}")
+    private String apiUrl;
+
     @Override
     public void sendMessage(DeviceMessage dm) {
         //如果数据变化则，发送emqx
@@ -99,11 +102,10 @@ public class PassengerFlowDevice extends BaseDevice {
         return false;
     }
 
-    public static PassengerFlow query() {
+    public PassengerFlow query() {
         PassengerFlow passengerFlowBean = new PassengerFlow();
-        String url = "http://10.165.160.21:6002/service/api/reports/index/customer_analysis_summary";
         try {
-            URL obj = new URL(url);
+            URL obj = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("GET");
             int responseCode = connection.getResponseCode();
@@ -111,15 +113,14 @@ public class PassengerFlowDevice extends BaseDevice {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
             in.close();
 
-            JSONObject jsonResponse = new JSONObject(response.toString());
-            JSONObject data = jsonResponse.getJSONObject("data");
+            JSONObject data = new JSONObject(response.toString()).getJSONObject("data");
 
             String retention = data.getStr("retention");
             String inpv = data.getStr("inpv");

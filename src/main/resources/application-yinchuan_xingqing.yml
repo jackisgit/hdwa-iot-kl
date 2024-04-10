@@ -1,6 +1,6 @@
 # mqtt配置
 mqtt:
-  hostUrl: tcp://127.0.0.1:1883
+  hostUrl: tcp://10.21.80.128:1883
   username: admin
   password: wanda@1234
   client-id: IOT-EPC-Pj${epc.gcId}-kl
@@ -15,13 +15,13 @@ mqtt:
 # spring配置
 spring:
   redis:
-    host: 127.0.0.1
+    host: 10.21.80.128
     port: 16379
     password:
 
 epc:
   # 广场id
-  gcId: 1502040050
+  gcId: 6401040090
 
 # 接口地址
-apiUrl: http://10.165.160.21:6002/service/api/reports/index/customer_analysis_summary
+apiUrl: http://10.21.80.201:6002/service/api/reports/index/customer_analysis_summary
