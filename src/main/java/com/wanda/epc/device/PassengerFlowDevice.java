@@ -124,7 +124,7 @@ public class PassengerFlowDevice extends BaseDevice {
 
             String retention = data.getStr("retention");
             String inpv = data.getStr("inpv");
-            String storeRetention = data.getStr("store_retention");
+            String storeRetention = data.getStr("street_retention");
             String streetInpv = data.getStr("street_inpv");
 
             passengerFlowBean.setCurrentNum(NumberUtil.isInteger(retention) ? Integer.parseInt(retention) : 0);
