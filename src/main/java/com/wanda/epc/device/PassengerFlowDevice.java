@@ -1,21 +1,19 @@
 package com.wanda.epc.device;
 
 import cn.hutool.core.util.NumberUtil;
-import cn.hutool.json.JSONObject;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wanda.epc.param.DeviceMessage;
 import com.wanda.epc.util.ConvertUtil;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,7 +30,7 @@ public class PassengerFlowDevice extends BaseDevice {
     @Value("${epc.gatewayId}")
     private String gatewayId;
 
-    @Value("${apiUrl}")
+    @Value("${url}")
     private String apiUrl;
 
     @Override
@@ -44,7 +42,7 @@ public class PassengerFlowDevice extends BaseDevice {
     }
 
     @Override
-    public boolean processData() throws Exception {
+    public boolean processData() {
         log.info("=====================开始进行客流采集=====================");
         Set<String> keys = redisUtil.scan("Pj" + this.gcId + "." + this.gatewayId + ".*");
         if (!CollectionUtils.isEmpty(keys)) {
@@ -104,35 +102,42 @@ public class PassengerFlowDevice extends BaseDevice {
 
     public PassengerFlow query() {
         PassengerFlow passengerFlowBean = new PassengerFlow();
+
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        String url = apiUrl + "?projectId=" + gcId;
+        log.warn("请求地址：{}", url);
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
         try {
-            URL obj = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-            connection.setRequestMethod("GET");
-            int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
+            Response response = client.newCall(request).execute();
+            com.alibaba.fastjson.JSONObject res = JSON.parseObject(response.body().string());
+            if (res.getInteger("code") == 200) {
+                log.warn("获取客流数据成功：{}", res);
+                JSONObject data = res.getJSONObject("data");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
+                //广场累计人数
+                Integer plazaFlow = data.get("plaza_flow") == null ? 0 : data.getInteger("plaza_flow");
+                //广场滞留人数
+                Integer plazaStay = data.get("plaza_stay") == null ? 0 : data.getInteger("plaza_stay");
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+
+                //步行街目前没有水
+                String storeRetention = data.getString("store_retention");
+                String streetInpv = data.getString("street_inpv");
+
+                passengerFlowBean.setCurrentNum(plazaStay);
+                passengerFlowBean.setTodayNum(plazaFlow);
+                passengerFlowBean.setStreetCurrentNum(NumberUtil.isInteger(storeRetention) ? Integer.parseInt(storeRetention) : 0);
+                passengerFlowBean.setStreetTodayNum(NumberUtil.isInteger(streetInpv) ? Integer.parseInt(streetInpv) : 0);
+
+            } else {
+                log.error("获取客流数据失败：{}", res);
             }
-            in.close();
-
-            JSONObject data = new JSONObject(response.toString()).getJSONObject("data");
-
-            String retention = data.getStr("retention");
-            String inpv = data.getStr("inpv");
-            String storeRetention = data.getStr("store_retention");
-            String streetInpv = data.getStr("street_inpv");
-
-            passengerFlowBean.setCurrentNum(NumberUtil.isInteger(retention) ? Integer.parseInt(retention) : 0);
-            passengerFlowBean.setTodayNum(NumberUtil.isInteger(inpv) ? Integer.parseInt(inpv) : 0);
-            passengerFlowBean.setStreetCurrentNum(NumberUtil.isInteger(storeRetention) ? Integer.parseInt(storeRetention) : 0);
-            passengerFlowBean.setStreetTodayNum(NumberUtil.isInteger(streetInpv) ? Integer.parseInt(streetInpv) : 0);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("获取客流数据异常", e);
         }
         return passengerFlowBean;
     }
