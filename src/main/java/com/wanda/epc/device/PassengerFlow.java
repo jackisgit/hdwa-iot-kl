@@ -2,12 +2,6 @@ package com.wanda.epc.device;
 
 import lombok.Data;
 
-/**
- * @program: DAPC
- * @description: 海康客流数据响应对象
- * @author: LianYanFei
- * @create: 2022-08-22 16:23
- **/
 @Data
 public class PassengerFlow {
 

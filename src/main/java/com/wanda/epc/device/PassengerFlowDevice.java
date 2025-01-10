@@ -117,14 +117,11 @@ public class PassengerFlowDevice extends BaseDevice {
             if (res.getInteger("code") == 200) {
                 log.warn("获取客流数据成功：{}", res);
                 JSONObject data = res.getJSONObject("data");
-
                 //广场累计人数
-                Integer plazaFlow = data.get("plaza_flow") == null ? 0 : data.getInteger("plaza_flow");
+                Integer plazaFlow = data.get("flow") == null ? 0 : data.getInteger("flow");
                 //广场滞留人数
-                Integer plazaStay = data.get("plaza_stay") == null ? 0 : data.getInteger("plaza_stay");
-
-
-                //步行街目前没有水
+                Integer plazaStay = data.get("stay") == null ? 0 : data.getInteger("stay");
+                //步行街目前没有
                 String storeRetention = data.getString("store_retention");
                 String streetInpv = data.getString("street_inpv");
 
@@ -132,7 +129,6 @@ public class PassengerFlowDevice extends BaseDevice {
                 passengerFlowBean.setTodayNum(plazaFlow);
                 passengerFlowBean.setStreetCurrentNum(NumberUtil.isInteger(storeRetention) ? Integer.parseInt(storeRetention) : 0);
                 passengerFlowBean.setStreetTodayNum(NumberUtil.isInteger(streetInpv) ? Integer.parseInt(streetInpv) : 0);
-
             } else {
                 log.error("获取客流数据失败：{}", res);
             }

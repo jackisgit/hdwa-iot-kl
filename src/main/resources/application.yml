@@ -2,7 +2,6 @@
 server:
   port: 8111
 
-
 #emqx配置
 mqtt:
   hostUrl: tcp://127.0.0.1:1883
@@ -37,4 +36,4 @@ epc:
 beanName: passengerFlowDevice
 
 #查询云端客流数据
-url: http://127.0.0.1:9804/monitor/core/openApi/queryCustomerNumber
+url: http://localhost:6667/api-ibms-monitor/monitor/core/openApi/queryCustomerNumber
