@@ -47,7 +47,9 @@ public class PassengerFlowDevice extends BaseDevice {
         Set<String> keys = redisUtil.scan("Pj" + this.gcId + "." + this.gatewayId + ".*");
         if (!CollectionUtils.isEmpty(keys)) {
             PassengerFlow passengerFlowBean = query();
-            log.info("客流统计查询结果：{}", JSON.toJSONString(passengerFlowBean));
+            if (passengerFlowBean == null) {
+                return false;
+            }
             //消息发送
             for (String key : keys) {
                 log.info("客流key================={}", key);
@@ -101,11 +103,11 @@ public class PassengerFlowDevice extends BaseDevice {
     }
 
     public PassengerFlow query() {
-        PassengerFlow passengerFlowBean = new PassengerFlow();
+        PassengerFlow passengerFlowBean = null;
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
-        String url = apiUrl + "?projectId=" + gcId;
+        String url = apiUrl + "?projectId=Pj" + gcId;
         log.warn("请求地址：{}", url);
         Request request = new Request.Builder()
                 .url(url)
@@ -124,7 +126,7 @@ public class PassengerFlowDevice extends BaseDevice {
                 //步行街目前没有
                 String storeRetention = data.getString("store_retention");
                 String streetInpv = data.getString("street_inpv");
-
+                passengerFlowBean = new PassengerFlow();
                 passengerFlowBean.setCurrentNum(plazaStay);
                 passengerFlowBean.setTodayNum(plazaFlow);
                 passengerFlowBean.setStreetCurrentNum(NumberUtil.isInteger(storeRetention) ? Integer.parseInt(storeRetention) : 0);

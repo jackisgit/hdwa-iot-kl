@@ -22,18 +22,7 @@ spring:
     host: 127.0.0.1
     port: 16379
     password:
-
-
-# 采集器配置
-epc:
-  # 广场id
-  gcId: 6401040090
-  gatewayId: KL
-  subsystem: klxt/
-  threadNum: 30
-  cron: 0 0/1 * * * ?
-
 beanName: passengerFlowDevice
 
 #查询云端客流数据
-url: http://localhost:6667/api-ibms-monitor/monitor/core/openApi/queryCustomerNumber
+url: http://localhost:6667/api-ibms-monitor/openApi/queryCustomerNumber
