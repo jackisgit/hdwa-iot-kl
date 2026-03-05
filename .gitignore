@@ -21,3 +21,6 @@ logs/
 # Dependencies
 lib/
 !release/lib/
+*-logs/
+rebel.xml
+lib.zip
